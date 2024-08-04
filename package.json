@@ -1,0 +1,36 @@
+{
+  "name": "betterstack-api",
+  "version": "1.0.0",
+  "description": "Package for betterstack's api",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build && tsc --help",
+    "lint": "npx eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inertia-Lighting/betterstack-api.git"
+  },
+  "keywords": [
+    "betterstack",
+    "inertia"
+  ],
+  "author": "Inertia Lighting",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Inertia-Lighting/betterstack-api/issues"
+  },
+  "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.7.3"
+  }
+}
