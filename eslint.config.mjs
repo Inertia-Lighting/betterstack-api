@@ -275,6 +275,9 @@ export default [
       "operator-linebreak": "error",
       "padded-blocks": "off",
       "padding-line-between-statements": "error",
+      "parserOptions": {
+        "project": "warn",
+      },
       "prefer-arrow-callback": "error",
       "prefer-const": "error",
       "prefer-destructuring": "off",
