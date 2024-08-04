@@ -66,6 +66,9 @@ export class BetterstackAPI {
      */
 
     public async getMonitor(monitor_id: string): Promise<SuccessfulMonitorReturn | UnsuccessfulResponse> {
+        if (!monitor_id) {
+            return { status: ResponseStatus.error, message: 'Monitor Id not supplied' }
+        }
         const request = await this._api_url.get<GetMonitorResponse>(`/api/v2/monitors/${monitor_id}`);
 
         if (request.status === 404) {
@@ -80,15 +83,19 @@ export class BetterstackAPI {
         return { status: ResponseStatus.success, monitor: data.data };
     }
 
-/**
- * @async
- * 
- * @param {string} monitor_id 
- * @param {'eu' | 'us'} region 
- * @returns {Promise<any>}
- */
-    
+    /**
+     * @async
+     * 
+     * @param {string} monitor_id 
+     * @param {'eu' | 'us'} region 
+     * Defaults to sending all regions
+     * @returns {Promise<any>}
+     */
+
     public async getMonitorResponseTimes(monitor_id: string, region?: 'eu' | 'us') {
+        if (!monitor_id) {
+            return { status: ResponseStatus.error, message: 'Monitor Id not supplied' }
+        }
         const request = await this._api_url.get<GetMonitorResponseTime>(`/api/v2/monitors/${monitor_id}/response-times`);
 
         if (request.status !== 200) {
@@ -114,6 +121,48 @@ export class BetterstackAPI {
             }
             default: {
                 return_data = data.data
+                break;
+            }
+        }
+        return { status: ResponseStatus.success, monitor: return_data };
+    }
+    /**
+ * @async
+ * 
+ * @param {string} monitor_id 
+ * @param {'eu' | 'us'} region
+ * Defaults to "us" 
+ * @returns {Promise<any>}
+ */
+
+    public async getLatestMonitorResponseTime(monitor_id: string, region: 'eu' | 'us' = 'us') {
+        if (!monitor_id) {
+            return { status: ResponseStatus.error, message: 'Monitor Id not supplied' }
+        }
+        const request = await this._api_url.get<GetMonitorResponseTime>(`/api/v2/monitors/${monitor_id}/response-times`);
+
+        if (request.status !== 200) {
+            return { status: ResponseStatus.error, message: 'There was an error making the request' };
+        }
+
+        const data = request.data;
+        let return_data;
+        switch (region) {
+            case 'us': {
+                return_data = data.data.attributes.regions.find((v) => v.region === region)?.response_times.at(-1)
+                if (!return_data) {
+                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                }
+                break;
+            }
+            case 'eu': {
+                return_data = data.data.attributes.regions.find((v) => v.region === region)?.response_times.at(-1)
+                if (!return_data) {
+                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                }
+                break;
+            }
+            default: {
                 break;
             }
         }
