@@ -44,20 +44,24 @@ Retrieves a specific monitor by its ID from the Betterstack API.
 <a name="BetterstackAPI+getMonitorResponseTimes"></a>
 
 ### betterstackAPI.getMonitorResponseTimes(monitor_id, region) ⇒ <code>Promise.&lt;any&gt;</code>
+Gets the response times of a monitor from different or all regions
+
 **Kind**: instance method of [<code>BetterstackAPI</code>](#BetterstackAPI)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| monitor_id | <code>string</code> |  |
+| monitor_id | <code>string</code> | Id of the monitor |
 | region | <code>&#x27;eu&#x27;</code> \| <code>&#x27;us&#x27;</code> | Defaults to sending all regions |
 
 <a name="BetterstackAPI+getLatestMonitorResponseTime"></a>
 
 ### betterstackAPI.getLatestMonitorResponseTime(monitor_id, region) ⇒ <code>Promise.&lt;any&gt;</code>
+Gets the latest response time of a monitor from a region
+
 **Kind**: instance method of [<code>BetterstackAPI</code>](#BetterstackAPI)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| monitor_id | <code>string</code> |  |  |
+| monitor_id | <code>string</code> |  | Id of the monitor |
 | region | <code>&#x27;eu&#x27;</code> \| <code>&#x27;us&#x27;</code> | <code>us</code> | Defaults to "us" |
 

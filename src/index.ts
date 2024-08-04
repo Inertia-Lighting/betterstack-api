@@ -24,7 +24,7 @@ export class BetterstackAPI {
 
     /**
      * Creates an instance of BetterstackAPI.
-     *
+     * 
      * @constructor
      * @param {string} api_token - The API token for accessing the Betterstack API.
      */
@@ -84,9 +84,12 @@ export class BetterstackAPI {
     }
 
     /**
+     * Gets the response times of a monitor from different or all regions
+     * 
      * @async
      * 
-     * @param {string} monitor_id 
+     * @param {string} monitor_id
+     * Id of the monitor
      * @param {'eu' | 'us'} region 
      * Defaults to sending all regions
      * @returns {Promise<any>}
@@ -127,9 +130,12 @@ export class BetterstackAPI {
         return { status: ResponseStatus.success, monitor: return_data };
     }
     /**
+     * 
+ * Gets the latest response time of a monitor from a region
  * @async
  * 
  * @param {string} monitor_id 
+ * Id of the monitor
  * @param {'eu' | 'us'} region
  * Defaults to "us" 
  * @returns {Promise<any>}
