@@ -392,7 +392,6 @@ export default [
         }
       ],
       "@typescript-eslint/restrict-plus-operands": "error",
-      "deprecation/deprecation": "warn"
     }
   }
 ];
