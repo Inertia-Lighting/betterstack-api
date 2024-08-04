@@ -13,6 +13,8 @@ type MonitorType = 'status' | 'expected_status_code' | 'keyword' | 'keyword_abse
 
 type MonitorStatus = 'up' | 'down' | 'validating' | 'paused' | 'pending' | 'maintenance'
 
+/* -------------------------------------------------------------------------- */
+
 interface MonitorRequestHeader {
     id: string;
     name: string;
@@ -44,11 +46,11 @@ interface MonitorAttributes {
     updated_at: string;
     ssl_expiration: number;
     domain_expiration: number;
-    regions: Array<string>;
+    regions: string[];
     port: string;
     confirmation_period: number;
-    expected_status_codes: Array<number>;
-    maintenance_days: Array<string>;
+    expected_status_codes: number[];
+    maintenance_days: string[];
     maintenance_from?: string;
     maintenance_to?: string;
     maintenance_timezone?: string;
@@ -63,7 +65,7 @@ interface GetMonitorResponse {
 }
 
 interface GetMonitorsResponse {
-    data: Array<Monitor>;
+    data: Monitor[];
     pagination: {
         first?: string;
         last?: string;
@@ -79,11 +81,11 @@ interface MonitorRegionResponseTimes {
 
 interface MonitorResponseRegions {
     region: string;
-    response_times: Array<MonitorRegionResponseTimes>;
+    response_times: MonitorRegionResponseTimes[];
 }
 
 interface MonitorResponseAttributes {
-    regions: Array<MonitorResponseRegions>;
+    regions: MonitorResponseRegions[];
 }
 
 interface MonitorResponseTime extends ApiObject {
@@ -97,6 +99,11 @@ interface GetMonitorResponseTime {
 
 /* -------------------------------------------------------------------------- */
 
+interface UnsuccessfulResponse {
+    status: ResponseStatus.error;
+    message: string;
+}
+
 interface SuccessfulReturn {
     status: ResponseStatus.success;
 }
@@ -106,10 +113,5 @@ interface SuccessfulMonitorReturn extends SuccessfulReturn {
 }
 
 interface SuccessfulMonitorsReturn extends SuccessfulReturn {
-    monitors: Array<Monitor>;
-}
-
-interface UnsuccessfulResponse {
-    status: ResponseStatus.error;
-    message: string;
+    monitors: BetterstackMonitor[];
 }
