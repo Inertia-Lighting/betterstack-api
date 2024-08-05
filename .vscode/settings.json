@@ -1,5 +1,12 @@
 {
     "cSpell.words": [
-        "Betterstack"
+        "backreference",
+        "Betterstack",
+        "camelcase",
+        "nonblock",
+        "nonoctal",
+        "nonwords",
+        "plusplus",
+        "tseslint"
     ]
 }

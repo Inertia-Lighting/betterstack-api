@@ -365,7 +365,7 @@ export default [
         "never"
       ],
       "vars-on-top": "error",
-      "wrap-iife": "error",
+      "fief": "error",
       "wrap-regex": "error",
       "yield-star-spacing": "error",
       "yoda": [

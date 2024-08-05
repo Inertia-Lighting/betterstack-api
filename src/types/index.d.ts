@@ -27,7 +27,7 @@ interface MonitorAttributes {
     monitor_type: MonitorType;
     monitor_group_id: string;
     last_checked_at: string;
-    status: MonitorStatusm;
+    status: MonitorStatus;
     required_keyword?: string;
     verify_ssl: boolean;
     check_frequency: number;
@@ -39,7 +39,7 @@ interface MonitorAttributes {
     http_method: string;
     request_timeout: number;
     recovery_period: number;
-    request_headers: Array<MonitorRequestHeader>;
+    request_headers: MonitorRequestHeader[];
     request_body: string;
     paused_at: string;
     created_at: string;

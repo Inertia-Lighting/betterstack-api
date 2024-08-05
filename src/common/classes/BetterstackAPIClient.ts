@@ -56,7 +56,7 @@ export class BetterstackAPIClient {
 
         const data = request.data;
         const returnData: BetterstackMonitor[] = [];
-        data.data.forEach((v, i) => {
+        data.data.forEach((v, _i) => {
             const monitor = new BetterstackMonitor(v.id, this)
             returnData.push(monitor)
         })
@@ -72,8 +72,8 @@ export class BetterstackAPIClient {
      */
 
     public async getMonitor(monitor_id: string): Promise<BetterstackMonitor | UnsuccessfulResponse> {
-        if (!monitor_id) {
-            return { status: ResponseStatus.error, message: 'Monitor Id not supplied' }
+        if (isMonitor(monitor_id)) {
+            monitor_id = monitor_id.id
         }
         const monitor = new BetterstackMonitor(monitor_id, this)
         return monitor
@@ -92,8 +92,8 @@ export class BetterstackAPIClient {
      */
 
     public async getMonitorResponseTimes(monitor_id: string, region?: 'eu' | 'us') {
-        if (!monitor_id) {
-            return { status: ResponseStatus.error, message: 'Monitor Id not supplied' }
+        if (isMonitor(monitor_id)) {
+            monitor_id = monitor_id.id
         }
         const request = await this._api_url.get<GetMonitorResponseTime>(`/api/v2/monitors/${monitor_id}/response-times`);
 
@@ -123,7 +123,7 @@ export class BetterstackAPIClient {
                 break;
             }
         }
-        return { status: ResponseStatus.success, monitor: return_data };
+         return { status: ResponseStatus.success, monitor: return_data };
     }
     /**
      * 
