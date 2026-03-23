@@ -1,6 +1,6 @@
 {
   "name": "@inertia-lighting/betterstack-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package for betterstack's api",
   "main": "dist/index.js",
   "author": "Inertia Lighting",
