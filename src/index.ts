@@ -1,2 +1,2 @@
-export * from '@root/common/classes/BetterstackAPIClient'
-export * from '@root/common/classes/Monitor'
+export * from '@/common/classes/BetterstackAPIClient'
+export * from '@/common/classes/Monitor'

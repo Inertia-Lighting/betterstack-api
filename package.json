@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "Package for betterstack's api",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "npm list && rm -rf dist && tsc --build",
-    "lint": "npx eslint",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Inertia Lighting",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inertia-Lighting/betterstack-api.git"
@@ -16,21 +14,23 @@
     "betterstack",
     "inertia"
   ],
-  "author": "Inertia Lighting",
-  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/Inertia-Lighting/betterstack-api/issues"
   },
-  "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
+  "scripts": {
+    "build": "tsup",
+    "lint": "npx eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.4",
+    "axios": "^1.13.6",
+    "tsup": "^8.5.1"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
-    "typescript": "^6.0.2",
     "typescript-eslint": "^8.57.1"
-  },
-  "dependencies": {
-    "@types/axios": "^0.14.4",
-    "axios": "^1.13.6"
   }
 }
