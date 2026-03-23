@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "author": "Inertia Lighting",
   "license": "UNLICENSED",
-  "private": "false",
   "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
   "repository": {
     "type": "git",
