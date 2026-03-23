@@ -23,14 +23,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@types/axios": "^0.14.4",
-    "axios": "^1.13.6",
-    "tsup": "^8.5.1"
-  },
+    "axios": "^1.13.6"
+    },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/axios": "^0.14.4",
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
+    "tsup": "^8.5.1",
     "typescript-eslint": "^8.57.1"
-  }
+    }
 }
