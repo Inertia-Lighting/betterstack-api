@@ -4,7 +4,7 @@
   "description": "Package for betterstack's api",
   "main": "dist/index.js",
   "author": "Inertia Lighting",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0-only",
   "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
   "repository": {
     "type": "git",
