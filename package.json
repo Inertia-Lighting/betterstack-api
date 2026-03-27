@@ -2,8 +2,8 @@
   "name": "@inertia-lighting/betterstack-api",
   "version": "1.0.2",
   "description": "Package for betterstack's api",
-  "main": "dist/index.js",
   "author": "Inertia Lighting",
+  "type": "module",
   "license": "GPL-3.0-only",
   "homepage": "https://github.com/Inertia-Lighting/betterstack-api#readme",
   "repository": {
@@ -18,9 +18,10 @@
     "url": "https://github.com/Inertia-Lighting/betterstack-api/issues"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "lint": "npx eslint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsdown --watch"
   },
   "dependencies": {
     "axios": "^1.13.6",
@@ -31,7 +32,17 @@
     "@types/axios": "^0.14.4",
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.21.4",
     "typescript-eslint": "^8.57.1"
-  }
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "module": "./dist/index.mjs"
 }

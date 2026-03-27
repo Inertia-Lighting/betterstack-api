@@ -1,2 +1,3 @@
-export * from '@/common/classes/BetterstackAPIClient'
-export * from '@/common/classes/Monitor'
+export * from '@/common/classes/BetterstackAPIClient.js'
+export * from '@/common/classes/Monitor.js'
+export * from '@/types/index'
