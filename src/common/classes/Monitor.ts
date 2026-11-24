@@ -1,4 +1,6 @@
-import { BetterstackAPIClient } from "./BetterstackAPIClient";
+
+import { BetterstackAPI } from "@/types/index.js";
+import { BetterstackAPIClient } from "./BetterstackAPIClient.js";
 
 /**
  * Monitor of a Betterstack system
@@ -22,7 +24,7 @@ export class BetterstackMonitor {
      * @private
      * @type {Monitor | undefined}
      */
-    private _monitor_data: Monitor | undefined;
+    private _monitor_data: BetterstackAPI.Monitor | undefined;
 
     /**
      * Set monitor id and the original api client
@@ -40,22 +42,22 @@ export class BetterstackMonitor {
     /**
      * Fetch the data from the monitor
      * 
-     * @returns {Promise<SuccessfulMonitorReturn | UnsuccessfulResponse>}
+     * @returns {Promise<BetterstackAPI.SuccessfulMonitorReturn | BetterstackAPI.UnsuccessfulResponse>}
      */
-    public async fetchData(): Promise<SuccessfulMonitorReturn | UnsuccessfulResponse> {
-        const request = await this._api_client.axios_instance.get<GetMonitorResponse>(`/api/v2/monitors/${this._monitor_id}`);
+    public async fetchData(): Promise<BetterstackAPI.SuccessfulMonitorReturn | BetterstackAPI.UnsuccessfulResponse> {
+        const request = await this._api_client.axios_instance.get<BetterstackAPI.GetMonitorResponse>(`/api/v2/monitors/${this._monitor_id}`);
 
         if (request.status === 404) {
-            return { status: ResponseStatus.error, message: 'The monitor was not found' };
+            return { status: BetterstackAPI.ResponseStatus.error, message: 'The monitor was not found' };
         }
 
         if (request.status !== 200) {
-            return { status: ResponseStatus.error, message: 'There was an error making the request' };
+            return { status: BetterstackAPI.ResponseStatus.error, message: 'There was an error making the request' };
         }
 
         const data = request.data;
         this._monitor_data = data.data;
-        return { status: ResponseStatus.success, monitor: data.data };
+        return { status: BetterstackAPI.ResponseStatus.success, monitor: data.data };
     }
 
     /**
@@ -65,13 +67,13 @@ export class BetterstackMonitor {
      * 
      * @param {'eu' | 'us'} region 
      * Defaults to 'us'
-     * @returns {Promise<any>}
+     * @returns {Promise<{ status: BetterstackAPI.ResponseStatus; monitor?: BetterstackAPI.MonitorRegionResponseTimes; message?: string; }>}
      */
-    public async getLatestResponseTime(region: 'eu' | 'us' = 'us'): Promise<any> {
-        const request = await this._api_client.axios_instance.get<GetMonitorResponseTime>(`/api/v2/monitors/${this._monitor_id}/response-times`);
+    public async getLatestResponseTime(region: 'eu' | 'us' = 'us'): Promise<{ status: BetterstackAPI.ResponseStatus; monitor?: BetterstackAPI.MonitorRegionResponseTimes; message?: string; }> {
+        const request = await this._api_client.axios_instance.get<BetterstackAPI.GetMonitorResponseTime>(`/api/v2/monitors/${this._monitor_id}/response-times`);
 
         if (request.status !== 200) {
-            return { status: ResponseStatus.error, message: 'There was an error making the request' };
+            return { status: BetterstackAPI.ResponseStatus.error, message: 'There was an error making the request' };
         }
 
         const data = request.data;
@@ -80,14 +82,14 @@ export class BetterstackMonitor {
             case 'us': {
                 return_data = data.data.attributes.regions.find(v => v.region === region)?.response_times.at(-1);
                 if (!return_data) {
-                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                    return { status: BetterstackAPI.ResponseStatus.error, message: `There was an error getting the ${region} region` };
                 }
                 break;
             }
             case 'eu': {
                 return_data = data.data.attributes.regions.find(v => v.region === region)?.response_times.at(-1);
                 if (!return_data) {
-                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                    return { status: BetterstackAPI.ResponseStatus.error, message: `There was an error getting the ${region} region` };
                 }
                 break;
             }
@@ -95,7 +97,7 @@ export class BetterstackMonitor {
                 break;
             }
         }
-        return { status: ResponseStatus.success, monitor: return_data };
+        return { status: BetterstackAPI.ResponseStatus.success, monitor: return_data };
     }
 
     /**
@@ -107,11 +109,11 @@ export class BetterstackMonitor {
      * Defaults to "us"
      * @returns {Promise<any>}
      */
-    public async getAllResponseTimes(region?: 'eu' | 'us'): Promise<any> {
-        const request = await this._api_client.axios_instance.get<GetMonitorResponseTime>(`/api/v2/monitors/${this._monitor_id}/response-times`);
+    public async getAllResponseTimes(region?: 'eu' | 'us'): Promise<{ status: BetterstackAPI.ResponseStatus; monitor?: BetterstackAPI.MonitorResponseTime | BetterstackAPI.MonitorResponseRegions; message?: string; }> {
+        const request = await this._api_client.axios_instance.get<BetterstackAPI.GetMonitorResponseTime>(`/api/v2/monitors/${this._monitor_id}/response-times`);
 
         if (request.status !== 200) {
-            return { status: ResponseStatus.error, message: 'There was an error making the request' };
+            return { status: BetterstackAPI.ResponseStatus.error, message: 'There was an error making the request' };
         }
 
         const data = request.data;
@@ -120,14 +122,14 @@ export class BetterstackMonitor {
             case 'us': {
                 return_data = data.data.attributes.regions.find(v => v.region === region);
                 if (!return_data) {
-                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                    return { status: BetterstackAPI.ResponseStatus.error, message: `There was an error getting the ${region} region` };
                 }
                 break;
             }
             case 'eu': {
                 return_data = data.data.attributes.regions.find(v => v.region === region);
                 if (!return_data) {
-                    return { status: ResponseStatus.error, message: `There was an error getting the ${region} region` };
+                    return { status: BetterstackAPI.ResponseStatus.error, message: `There was an error getting the ${region} region` };
                 }
                 break;
             }
@@ -136,7 +138,7 @@ export class BetterstackMonitor {
                 break;
             }
         }
-        return { status: ResponseStatus.success, monitor: return_data };
+        return { status: BetterstackAPI.ResponseStatus.success, monitor: return_data };
     }
 
     /**
@@ -162,7 +164,7 @@ export class BetterstackMonitor {
      * 
      * @type {Monitor | undefined}
      */
-    get data(): Monitor | undefined {
+    get data(): BetterstackAPI.Monitor | undefined {
         return this._monitor_data;
     }
 }
